@@ -6,6 +6,18 @@ import { PageData } from '@/lib/types';
 
 export async function POST(request: Request) {
   try {
+    // Check token is configured
+    const token = process.env.HUBSPOT_ACCESS_TOKEN;
+    if (!token || token === 'your-hubspot-private-app-token-here') {
+      return NextResponse.json(
+        {
+          error:
+            'HubSpot access token not configured. Add your Private App token to .env.local as HUBSPOT_ACCESS_TOKEN, then restart the dev server.',
+        },
+        { status: 401 }
+      );
+    }
+
     const { pageData, pageId, action } = (await request.json()) as {
       pageData: PageData;
       pageId?: string;

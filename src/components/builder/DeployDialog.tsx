@@ -1,27 +1,62 @@
 'use client';
 
-import { useState } from 'react';
-import { X, Code2, Rocket, Loader2 } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { X, Code2, Rocket, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
+import { usePageStore } from '@/store/pageStore';
+
+interface DeployResult {
+  success: boolean;
+  pageId?: string;
+  error?: string;
+}
 
 interface DeployDialogProps {
   open: boolean;
   onClose: () => void;
   headHtml: string;
   footerHtml: string;
+  onDeploy: (action: 'draft' | 'publish', targetPageId?: string) => Promise<void>;
+  deployResult: DeployResult | null;
 }
 
 type Tab = 'preview' | 'deploy';
 type DeployMode = 'create' | 'update';
 
-export default function DeployDialog({ open, onClose, headHtml, footerHtml }: DeployDialogProps) {
+export default function DeployDialog({
+  open,
+  onClose,
+  headHtml,
+  footerHtml,
+  onDeploy,
+  deployResult,
+}: DeployDialogProps) {
   const [activeTab, setActiveTab] = useState<Tab>('preview');
   const [deployMode, setDeployMode] = useState<DeployMode>('create');
-  const [pageNameInput, setPageNameInput] = useState('');
-  const [pageSlugInput, setPageSlugInput] = useState('');
   const [existingPageId, setExistingPageId] = useState('');
-  const [isDeploying, setIsDeploying] = useState(false);
+  const isDeploying = usePageStore((s) => s.isDeploying);
+
+  const pageName = usePageStore((s) => s.pageName);
+  const pageSlug = usePageStore((s) => s.pageSlug);
+  const updatePageMeta = usePageStore((s) => s.updatePageMeta);
+
+  // Reset result when dialog closes
+  useEffect(() => {
+    if (!open) {
+      setActiveTab('preview');
+    }
+  }, [open]);
 
   if (!open) return null;
+
+  const handleDeploy = async (action: 'draft' | 'publish') => {
+    const targetPageId = deployMode === 'update' ? existingPageId : undefined;
+    await onDeploy(action, targetPageId);
+  };
+
+  const canDeploy =
+    pageName.trim().length > 0 &&
+    pageSlug.trim().length > 0 &&
+    (deployMode === 'create' || existingPageId.trim().length > 0);
 
   const tabs: { key: Tab; label: string; icon: typeof Code2 }[] = [
     { key: 'preview', label: 'Preview Code', icon: Code2 },
@@ -103,8 +138,8 @@ export default function DeployDialog({ open, onClose, headHtml, footerHtml }: De
                 <label className="text-sm font-medium text-slate-700">Page Name</label>
                 <input
                   type="text"
-                  value={pageNameInput}
-                  onChange={(e) => setPageNameInput(e.target.value)}
+                  value={pageName}
+                  onChange={(e) => updatePageMeta({ pageName: e.target.value })}
                   className="rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400"
                   placeholder="My Landing Page"
                 />
@@ -115,8 +150,8 @@ export default function DeployDialog({ open, onClose, headHtml, footerHtml }: De
                 <label className="text-sm font-medium text-slate-700">Page Slug</label>
                 <input
                   type="text"
-                  value={pageSlugInput}
-                  onChange={(e) => setPageSlugInput(e.target.value)}
+                  value={pageSlug}
+                  onChange={(e) => updatePageMeta({ pageSlug: e.target.value })}
                   className="rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400"
                   placeholder="direct-booking-website"
                 />
@@ -167,16 +202,49 @@ export default function DeployDialog({ open, onClose, headHtml, footerHtml }: De
                 </div>
               )}
 
+              {/* Result feedback */}
+              {deployResult && (
+                <div
+                  className={`flex items-start gap-3 rounded-lg border p-3 ${
+                    deployResult.success
+                      ? 'border-green-200 bg-green-50'
+                      : 'border-red-200 bg-red-50'
+                  }`}
+                >
+                  {deployResult.success ? (
+                    <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-green-600" />
+                  ) : (
+                    <AlertCircle size={18} className="mt-0.5 shrink-0 text-red-600" />
+                  )}
+                  <div className="text-sm">
+                    {deployResult.success ? (
+                      <>
+                        <p className="font-medium text-green-800">Deployed successfully!</p>
+                        {deployResult.pageId && (
+                          <p className="mt-1 text-green-700">
+                            Page ID:{' '}
+                            <code className="rounded bg-green-100 px-1.5 py-0.5 font-mono text-xs">
+                              {deployResult.pageId}
+                            </code>
+                          </p>
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        <p className="font-medium text-red-800">Deploy failed</p>
+                        <p className="mt-1 text-red-700">{deployResult.error}</p>
+                      </>
+                    )}
+                  </div>
+                </div>
+              )}
+
               {/* Action buttons */}
               <div className="flex items-center gap-3 pt-2">
                 <button
                   type="button"
-                  disabled={isDeploying}
-                  onClick={() => {
-                    setIsDeploying(true);
-                    // Placeholder -- actual deploy logic will be wired in later
-                    setTimeout(() => setIsDeploying(false), 2000);
-                  }}
+                  disabled={isDeploying || !canDeploy}
+                  onClick={() => handleDeploy('draft')}
                   className="flex items-center gap-2 rounded-full border border-slate-200 px-5 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50 transition-colors disabled:opacity-50"
                 >
                   {isDeploying ? <Loader2 size={15} className="animate-spin" /> : null}
@@ -184,12 +252,8 @@ export default function DeployDialog({ open, onClose, headHtml, footerHtml }: De
                 </button>
                 <button
                   type="button"
-                  disabled={isDeploying}
-                  onClick={() => {
-                    setIsDeploying(true);
-                    // Placeholder -- actual deploy logic will be wired in later
-                    setTimeout(() => setIsDeploying(false), 2000);
-                  }}
+                  disabled={isDeploying || !canDeploy}
+                  onClick={() => handleDeploy('publish')}
                   className="flex items-center gap-2 rounded-full px-5 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-50"
                   style={{
                     background: 'linear-gradient(90.37deg, #3963E7 8.45%, #543CE8 98.1%)',

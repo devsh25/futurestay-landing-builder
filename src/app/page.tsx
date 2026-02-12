@@ -38,7 +38,7 @@ const SECTION_FORMS: Record<string, React.ComponentType> = {
 export default function Home() {
   useAutoSave();
   const previewHtml = usePreview();
-  const { getGeneratedCode } = useDeploy();
+  const { deploy, result, getGeneratedCode } = useDeploy();
 
   const activeSection = usePageStore((s) => s.activeSection);
   const showDeployDialog = usePageStore((s) => s.showDeployDialog);
@@ -58,6 +58,8 @@ export default function Home() {
         onClose={() => setShowDeployDialog(false)}
         headHtml={headHtml}
         footerHtml={footerHtml}
+        onDeploy={deploy}
+        deployResult={result}
       />
     </>
   );
