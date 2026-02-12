@@ -1,4 +1,4 @@
-import { PageData } from './types';
+import { PageData, OrderableSectionKey } from './types';
 import { DEFAULT_TOKENS } from './designTokens';
 
 export const DEFAULT_PAGE_DATA: PageData = {
@@ -237,4 +237,19 @@ export const DEFAULT_PAGE_DATA: PageData = {
       linkedin: 'https://linkedin.com/company/futurestay',
     },
   },
+
+  sectionOrder: [
+    'header',
+    'hero',
+    'socialProofBar',
+    'partnerLogos',
+    'steps',
+    'stats',
+    'features',
+    'testimonials',
+    'comparison',
+    'ctaSection',
+    'faq',
+    'footer',
+  ] as OrderableSectionKey[],
 };

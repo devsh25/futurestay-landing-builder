@@ -1,7 +1,8 @@
 'use client';
 
 import { usePageStore } from '@/store/pageStore';
-import { Stat } from '@/lib/types';
+import { Stat, TextSize } from '@/lib/types';
+import SizeSelector from '@/components/ui/SizeSelector';
 
 export default function StatsForm() {
   const section = usePageStore((s) => s.stats);
@@ -38,6 +39,25 @@ export default function StatsForm() {
           />
           <span className="text-sm font-medium text-slate-700">Enabled</span>
         </label>
+      </div>
+
+      {/* Sizing */}
+      <div className="border-t border-slate-100 pt-3 mt-1">
+        <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Sizing</p>
+        <SizeSelector<TextSize>
+          label="Value Size"
+          value={section.valueSize}
+          onChange={(size) => updateSection('stats', { valueSize: size })}
+          options={['2xl', '3xl', '4xl']}
+          type="text"
+        />
+        <SizeSelector<TextSize>
+          label="Label Size"
+          value={section.labelSize}
+          onChange={(size) => updateSection('stats', { labelSize: size })}
+          options={['sm', 'base', 'lg']}
+          type="text"
+        />
       </div>
 
       <div>

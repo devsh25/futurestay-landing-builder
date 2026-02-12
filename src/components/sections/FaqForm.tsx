@@ -1,7 +1,8 @@
 'use client';
 
 import { usePageStore } from '@/store/pageStore';
-import { FaqItem } from '@/lib/types';
+import { FaqItem, TextSize } from '@/lib/types';
+import SizeSelector from '@/components/ui/SizeSelector';
 
 export default function FaqForm() {
   const section = usePageStore((s) => s.faq);
@@ -48,6 +49,25 @@ export default function FaqForm() {
           onChange={(e) => updateSection('faq', { sectionTitle: e.target.value })}
           placeholder="Frequently Asked Questions"
           className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        />
+      </div>
+
+      {/* Sizing */}
+      <div className="border-t border-slate-100 pt-3 mt-1">
+        <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Sizing</p>
+        <SizeSelector<TextSize>
+          label="Section Title Size"
+          value={section.sectionTitleSize}
+          onChange={(size) => updateSection('faq', { sectionTitleSize: size })}
+          options={['2xl', '3xl', '4xl']}
+          type="text"
+        />
+        <SizeSelector<TextSize>
+          label="Question Size"
+          value={section.questionSize}
+          onChange={(size) => updateSection('faq', { questionSize: size })}
+          options={['base', 'lg', 'xl']}
+          type="text"
         />
       </div>
 

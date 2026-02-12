@@ -1,8 +1,9 @@
 'use client';
 
 import { usePageStore } from '@/store/pageStore';
-import { Feature } from '@/lib/types';
+import { Feature, TextSize, ImageSize } from '@/lib/types';
 import ImageUpload from '@/components/ui/ImageUpload';
+import SizeSelector from '@/components/ui/SizeSelector';
 
 export default function FeaturesForm() {
   const section = usePageStore((s) => s.features);
@@ -49,6 +50,32 @@ export default function FeaturesForm() {
           onChange={(e) => updateSection('features', { sectionTitle: e.target.value })}
           placeholder="Key Features"
           className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        />
+      </div>
+
+      {/* Sizing */}
+      <div className="border-t border-slate-100 pt-3 mt-1">
+        <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Sizing</p>
+        <SizeSelector<TextSize>
+          label="Section Title Size"
+          value={section.sectionTitleSize}
+          onChange={(size) => updateSection('features', { sectionTitleSize: size })}
+          options={['2xl', '3xl', '4xl']}
+          type="text"
+        />
+        <SizeSelector<TextSize>
+          label="Card Title Size"
+          value={section.cardTitleSize}
+          onChange={(size) => updateSection('features', { cardTitleSize: size })}
+          options={['lg', 'xl', '2xl']}
+          type="text"
+        />
+        <SizeSelector<ImageSize>
+          label="Feature Icon Size"
+          value={section.featureImageSize}
+          onChange={(size) => updateSection('features', { featureImageSize: size })}
+          options={['sm', 'md', 'lg', 'xl']}
+          type="image"
         />
       </div>
 

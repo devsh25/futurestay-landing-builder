@@ -5,7 +5,7 @@ import { usePageStore } from '@/store/pageStore';
 
 const STORAGE_KEY = 'futurestay-builder-draft';
 // Bump this version whenever defaults change to invalidate stale drafts
-const DRAFT_VERSION = 2;
+const DRAFT_VERSION = 3;
 const VERSION_KEY = 'futurestay-builder-draft-version';
 
 export function useAutoSave() {

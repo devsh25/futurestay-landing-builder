@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { PageData, PreviewDevice, SectionKey } from '../lib/types';
+import { PageData, PreviewDevice, SectionKey, OrderableSectionKey } from '../lib/types';
 import { DEFAULT_PAGE_DATA } from '../lib/defaults';
 
 interface PageBuilderStore extends PageData {
@@ -15,6 +15,7 @@ interface PageBuilderStore extends PageData {
   setPreviewDevice: (device: PreviewDevice) => void;
   setIsDeploying: (v: boolean) => void;
   setShowDeployDialog: (v: boolean) => void;
+  setSectionOrder: (order: OrderableSectionKey[]) => void;
   loadFromJson: (data: PageData) => void;
   getPageData: () => PageData;
   reset: () => void;
@@ -40,6 +41,7 @@ export const usePageStore = create<PageBuilderStore>((set, get) => ({
   setPreviewDevice: (device) => set({ previewDevice: device }),
   setIsDeploying: (v) => set({ isDeploying: v }),
   setShowDeployDialog: (v) => set({ showDeployDialog: v }),
+  setSectionOrder: (order) => set({ sectionOrder: order, isDirty: true }),
 
   loadFromJson: (data) =>
     set({
@@ -66,6 +68,7 @@ export const usePageStore = create<PageBuilderStore>((set, get) => ({
       ctaSection: state.ctaSection,
       faq: state.faq,
       footer: state.footer,
+      sectionOrder: state.sectionOrder,
     };
   },
 

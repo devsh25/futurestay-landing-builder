@@ -5,6 +5,7 @@ import { usePageStore } from '@/store/pageStore';
 import { generateHeadHtml } from '@/generators/generateHeadHtml';
 import { generateFooterHtml } from '@/generators/generateFooterHtml';
 import { PageData, DesignTokens } from '@/lib/types';
+import { textSizeDesktop, textSizeMobile, imageSizeCSS, iconSizePx } from '@/lib/sizePresets';
 
 function grad(tokens: DesignTokens): string {
   return `linear-gradient(90.37deg, ${tokens.primaryGradientStart} 8.45%, ${tokens.primaryGradientEnd} 98.1%)`;
@@ -78,12 +79,12 @@ function renderHero(data: PageData, tokens: DesignTokens): string {
   ">
     <div style="max-width: 1140px; margin: 0 auto; display: flex; gap: 48px; align-items: center; flex-wrap: wrap;">
       <div style="flex: 1; min-width: 320px;">
-        <h1 style="
-          font-size: 44px; font-weight: ${tokens.headingFontWeight};
+        <h1 class="hero-headline" style="
+          font-size: ${textSizeDesktop(data.hero.headlineSize, '4xl')}; font-weight: ${tokens.headingFontWeight};
           line-height: 1.12; margin-bottom: 18px; color: #121314;
           letter-spacing: -0.5px;
         ">${esc(data.hero.headline)}</h1>
-        <p style="font-size: 18px; line-height: 1.65; color: #3D4244; margin-bottom: 24px;">
+        <p class="hero-subtext" style="font-size: ${textSizeDesktop(data.hero.subtextSize, 'lg')}; line-height: 1.65; color: #3D4244; margin-bottom: 24px;">
           ${esc(data.hero.subtext)}
         </p>
         <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 28px;">
@@ -109,7 +110,7 @@ function renderHero(data: PageData, tokens: DesignTokens): string {
       </div>
       <div style="flex: 1; min-width: 320px;">
         ${data.hero.heroImageUrl
-          ? `<img src="${esc(data.hero.heroImageUrl)}" alt="Hero" style="border-radius: 16px; width: 100%; display: block;">`
+          ? `<img src="${esc(data.hero.heroImageUrl)}" alt="Hero" class="hero-image" style="border-radius: 16px; display: block; ${imageSizeCSS(data.hero.heroImageSize, 'full')}">`
           : `<div style="width: 100%; height: 340px; background: linear-gradient(135deg, #dde2ed 0%, #c8d0e0 100%); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 14px;">Hero Image</div>`
         }
       </div>
@@ -167,8 +168,8 @@ function renderSteps(data: PageData, tokens: DesignTokens): string {
     ">
       <div style="margin-bottom: 16px;">
         ${step.iconUrl
-          ? `<img src="${esc(step.iconUrl)}" alt="${esc(step.title)}" style="width: 56px; height: 56px; margin: 0 auto; display: block;">`
-          : `<div style="width: 56px; height: 56px; margin: 0 auto; border-radius: 50%; background: ${grad(tokens)}; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 20px; font-weight: 700;">${esc(step.stepNumber)}</div>`
+          ? `<img src="${esc(step.iconUrl)}" alt="${esc(step.title)}" style="width: ${iconSizePx(data.steps.stepIconSize, 'lg')}; height: ${iconSizePx(data.steps.stepIconSize, 'lg')}; margin: 0 auto; display: block;">`
+          : `<div style="width: ${iconSizePx(data.steps.stepIconSize, 'lg')}; height: ${iconSizePx(data.steps.stepIconSize, 'lg')}; margin: 0 auto; border-radius: 50%; background: ${grad(tokens)}; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 20px; font-weight: 700;">${esc(step.stepNumber)}</div>`
         }
       </div>
       <div style="
@@ -177,7 +178,7 @@ function renderSteps(data: PageData, tokens: DesignTokens): string {
         background: ${grad(tokens)}; color: #fff;
         font-size: 13px; font-weight: 700; margin-bottom: 14px;
       ">${esc(step.stepNumber)}</div>
-      <h3 style="font-size: 20px; font-weight: 700; color: #121314; margin-bottom: 10px;">${esc(step.title)}</h3>
+      <h3 class="steps-card-title" style="font-size: ${textSizeDesktop(data.steps.cardTitleSize, 'xl')}; font-weight: 700; color: #121314; margin-bottom: 10px;">${esc(step.title)}</h3>
       <p style="font-size: 15px; line-height: 1.6; color: #3D4244;">${esc(step.description)}</p>
     </div>
   `).join('');
@@ -185,8 +186,8 @@ function renderSteps(data: PageData, tokens: DesignTokens): string {
   return `
   <section style="background: #F7F8FA; padding: 72px 40px;">
     <div style="max-width: 1140px; margin: 0 auto;">
-      <h2 style="
-        font-size: 34px; font-weight: ${tokens.headingFontWeight};
+      <h2 class="steps-title" style="
+        font-size: ${textSizeDesktop(data.steps.sectionTitleSize, '3xl')}; font-weight: ${tokens.headingFontWeight};
         text-align: center; color: #121314; margin-bottom: 48px;
         line-height: 1.2;
       ">${esc(data.steps.sectionTitle)}</h2>
@@ -202,12 +203,12 @@ function renderStats(data: PageData, tokens: DesignTokens): string {
 
   const statsHtml = data.stats.stats.map((stat, i) => `
     <div style="flex: 1; min-width: 180px; text-align: center; padding: 0 16px;">
-      <div style="
-        font-size: 42px; font-weight: ${tokens.headingFontWeight};
+      <div class="stats-value" style="
+        font-size: ${textSizeDesktop(data.stats.valueSize, '4xl')}; font-weight: ${tokens.headingFontWeight};
         color: ${i === 0 ? '#04D361' : '#fff'};
         margin-bottom: 10px; letter-spacing: -1px;
       ">${esc(stat.value)}</div>
-      <div style="font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.5; max-width: 220px; margin: 0 auto;">
+      <div class="stats-label" style="font-size: ${textSizeDesktop(data.stats.labelSize, 'sm')}; color: rgba(255,255,255,0.7); line-height: 1.5; max-width: 220px; margin: 0 auto;">
         ${esc(stat.label)}
       </div>
     </div>
@@ -224,12 +225,13 @@ function renderStats(data: PageData, tokens: DesignTokens): string {
 function renderFeatures(data: PageData, tokens: DesignTokens): string {
   if (!data.features.enabled || data.features.features.length === 0) return '';
 
+  const iconDim = iconSizePx(data.features.featureImageSize, 'md');
   const featureIcon = (imageUrl: string) => {
     if (imageUrl) {
-      return `<img src="${esc(imageUrl)}" alt="" style="width: 48px; height: 48px; border-radius: 12px;">`;
+      return `<img src="${esc(imageUrl)}" alt="" style="width: ${iconDim}; height: ${iconDim}; border-radius: 12px;">`;
     }
     return `<div style="
-      width: 48px; height: 48px; border-radius: 12px;
+      width: ${iconDim}; height: ${iconDim}; border-radius: 12px;
       background: linear-gradient(135deg, ${tokens.primaryGradientStart}22, ${tokens.primaryGradientEnd}22);
       display: flex; align-items: center; justify-content: center;
     "><svg width="24" height="24" fill="none" stroke="${tokens.primaryGradientStart}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>`;
@@ -242,7 +244,7 @@ function renderFeatures(data: PageData, tokens: DesignTokens): string {
       box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     ">
       <div style="margin-bottom: 16px;">${featureIcon(f.imageUrl)}</div>
-      <h3 style="font-size: 18px; font-weight: 700; color: #121314; margin-bottom: 10px;">${esc(f.title)}</h3>
+      <h3 class="features-card-title" style="font-size: ${textSizeDesktop(data.features.cardTitleSize, 'lg')}; font-weight: 700; color: #121314; margin-bottom: 10px;">${esc(f.title)}</h3>
       <p style="font-size: 15px; line-height: 1.6; color: #3D4244;">${esc(f.description)}</p>
     </div>
   `).join('');
@@ -250,8 +252,8 @@ function renderFeatures(data: PageData, tokens: DesignTokens): string {
   return `
   <section style="background: #F7F8FA; padding: 72px 40px;">
     <div style="max-width: 1140px; margin: 0 auto;">
-      <h2 style="
-        font-size: 34px; font-weight: ${tokens.headingFontWeight};
+      <h2 class="features-title" style="
+        font-size: ${textSizeDesktop(data.features.sectionTitleSize, '3xl')}; font-weight: ${tokens.headingFontWeight};
         text-align: center; color: #121314; margin-bottom: 48px;
         line-height: 1.2;
       ">${esc(data.features.sectionTitle)}</h2>
@@ -278,7 +280,7 @@ function renderTestimonials(data: PageData, tokens: DesignTokens): string {
         -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         margin-bottom: 12px; opacity: 0.3;
       ">\u201C</div>
-      <p style="font-size: 15px; line-height: 1.65; color: #3D4244; margin-bottom: 20px; font-style: italic;">
+      <p class="testimonials-quote" style="font-size: ${textSizeDesktop(data.testimonials.quoteSize, 'base')}; line-height: 1.65; color: #3D4244; margin-bottom: 20px; font-style: italic;">
         ${esc(t.quote)}
       </p>
       <div style="margin-bottom: 8px;">${stars(t.rating)}</div>
@@ -301,8 +303,8 @@ function renderTestimonials(data: PageData, tokens: DesignTokens): string {
       border-radius: 50%; background: ${grad(tokens)}; opacity: 0.04;
     "></div>
     <div style="max-width: 1140px; margin: 0 auto; position: relative; z-index: 1;">
-      <h2 style="
-        font-size: 34px; font-weight: ${tokens.headingFontWeight};
+      <h2 class="testimonials-title" style="
+        font-size: ${textSizeDesktop(data.testimonials.sectionTitleSize, '3xl')}; font-weight: ${tokens.headingFontWeight};
         text-align: center; color: #121314; margin-bottom: 48px;
         line-height: 1.2;
       ">${esc(data.testimonials.sectionTitle)}</h2>
@@ -360,8 +362,8 @@ function renderComparison(data: PageData, tokens: DesignTokens): string {
   return `
   <section style="background: #fff; padding: 72px 40px;">
     <div style="max-width: 1140px; margin: 0 auto;">
-      <h2 style="
-        font-size: 34px; font-weight: ${tokens.headingFontWeight};
+      <h2 class="comparison-title" style="
+        font-size: ${textSizeDesktop(data.comparison.sectionTitleSize, '3xl')}; font-weight: ${tokens.headingFontWeight};
         text-align: center; color: #121314; margin-bottom: 48px;
         line-height: 1.2;
       ">${esc(data.comparison.sectionTitle)}</h2>
@@ -409,11 +411,11 @@ function renderCtaSection(data: PageData, tokens: DesignTokens): string {
     "></div>
     <div style="max-width: 1140px; margin: 0 auto; display: flex; gap: 48px; align-items: center; flex-wrap: wrap; position: relative; z-index: 1;">
       <div style="flex: 1; min-width: 320px;">
-        <h2 style="
-          font-size: 36px; font-weight: ${tokens.headingFontWeight};
+        <h2 class="cta-headline" style="
+          font-size: ${textSizeDesktop(data.ctaSection.headlineSize, '3xl')}; font-weight: ${tokens.headingFontWeight};
           color: #fff; margin-bottom: 16px; line-height: 1.2;
         ">${esc(data.ctaSection.headline)}</h2>
-        <p style="font-size: 18px; line-height: 1.6; color: rgba(255,255,255,0.85); margin-bottom: 28px;">
+        <p class="cta-subtext" style="font-size: ${textSizeDesktop(data.ctaSection.subtextSize, 'lg')}; line-height: 1.6; color: rgba(255,255,255,0.85); margin-bottom: 28px;">
           ${esc(data.ctaSection.subtext)}
         </p>
         <a href="${esc(data.ctaSection.ctaUrl)}" style="
@@ -427,7 +429,7 @@ function renderCtaSection(data: PageData, tokens: DesignTokens): string {
       </div>
       <div style="flex: 1; min-width: 280px;">
         ${data.ctaSection.imageUrl
-          ? `<img src="${esc(data.ctaSection.imageUrl)}" alt="CTA" style="border-radius: 16px; width: 100%; display: block; box-shadow: 0 8px 32px rgba(0,0,0,0.2);">`
+          ? `<img src="${esc(data.ctaSection.imageUrl)}" alt="CTA" class="cta-image" style="border-radius: 16px; display: block; box-shadow: 0 8px 32px rgba(0,0,0,0.2); ${imageSizeCSS(data.ctaSection.ctaImageSize, 'full')}">`
           : `<div style="width: 100%; height: 300px; background: rgba(255,255,255,0.1); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5); font-size: 14px;">CTA Image</div>`
         }
       </div>
@@ -457,7 +459,7 @@ function renderFaq(data: PageData, tokens: DesignTokens): string {
       " style="
         width: 100%; display: flex; align-items: center; justify-content: space-between;
         padding: 20px 0; background: none; border: none; cursor: pointer;
-        text-align: left; font-size: 17px; font-weight: 600; color: #121314;
+        text-align: left; font-size: ${textSizeDesktop(data.faq.questionSize, 'lg')}; font-weight: 600; color: #121314;
         font-family: inherit;
       ">
         <span>${esc(item.question)}</span>
@@ -480,8 +482,8 @@ function renderFaq(data: PageData, tokens: DesignTokens): string {
   return `
   <section style="background: #fff; padding: 72px 40px;">
     <div style="max-width: 780px; margin: 0 auto;">
-      <h2 style="
-        font-size: 34px; font-weight: ${tokens.headingFontWeight};
+      <h2 class="faq-title" style="
+        font-size: ${textSizeDesktop(data.faq.sectionTitleSize, '3xl')}; font-weight: ${tokens.headingFontWeight};
         text-align: center; color: #121314; margin-bottom: 48px;
         line-height: 1.2;
       ">${esc(data.faq.sectionTitle)}</h2>
@@ -549,25 +551,55 @@ function renderFooter(data: PageData, tokens: DesignTokens): string {
   </footer>`;
 }
 
+// Map section keys to render functions
+const RENDER_MAP: Record<string, (data: PageData, tokens: DesignTokens) => string> = {
+  header: (d, t) => renderHeader(d, t),
+  hero: (d, t) => renderHero(d, t),
+  socialProofBar: (d) => renderSocialProofBar(d),
+  partnerLogos: (d) => renderPartnerLogos(d),
+  steps: (d, t) => renderSteps(d, t),
+  stats: (d, t) => renderStats(d, t),
+  features: (d, t) => renderFeatures(d, t),
+  testimonials: (d, t) => renderTestimonials(d, t),
+  comparison: (d, t) => renderComparison(d, t),
+  ctaSection: (d, t) => renderCtaSection(d, t),
+  faq: (d, t) => renderFaq(d, t),
+  footer: (d, t) => renderFooter(d, t),
+};
+
+function generateMobileStyles(data: PageData): string {
+  // Generate mobile font-size overrides based on user's selected presets
+  return `
+    @media (max-width: 768px) {
+      body { padding-top: 60px; }
+      .hero-headline { font-size: ${textSizeMobile(data.hero.headlineSize, '4xl')} !important; }
+      .hero-subtext { font-size: ${textSizeMobile(data.hero.subtextSize, 'lg')} !important; }
+      .steps-title { font-size: ${textSizeMobile(data.steps.sectionTitleSize, '3xl')} !important; }
+      .steps-card-title { font-size: ${textSizeMobile(data.steps.cardTitleSize, 'xl')} !important; }
+      .stats-value { font-size: ${textSizeMobile(data.stats.valueSize, '4xl')} !important; }
+      .stats-label { font-size: ${textSizeMobile(data.stats.labelSize, 'sm')} !important; }
+      .features-title { font-size: ${textSizeMobile(data.features.sectionTitleSize, '3xl')} !important; }
+      .features-card-title { font-size: ${textSizeMobile(data.features.cardTitleSize, 'lg')} !important; }
+      .testimonials-title { font-size: ${textSizeMobile(data.testimonials.sectionTitleSize, '3xl')} !important; }
+      .testimonials-quote { font-size: ${textSizeMobile(data.testimonials.quoteSize, 'base')} !important; }
+      .comparison-title { font-size: ${textSizeMobile(data.comparison.sectionTitleSize, '3xl')} !important; }
+      .cta-headline { font-size: ${textSizeMobile(data.ctaSection.headlineSize, '3xl')} !important; }
+      .cta-subtext { font-size: ${textSizeMobile(data.ctaSection.subtextSize, 'lg')} !important; }
+      .faq-title { font-size: ${textSizeMobile(data.faq.sectionTitleSize, '3xl')} !important; }
+    }
+  `;
+}
+
 function generatePreviewHtml(data: PageData): string {
   const headHtml = generateHeadHtml(data);
   const footerHtml = generateFooterHtml(data);
   const tokens = data.designTokens;
 
-  const sections = [
-    renderHeader(data, tokens),
-    renderHero(data, tokens),
-    renderSocialProofBar(data),
-    renderPartnerLogos(data),
-    renderSteps(data, tokens),
-    renderStats(data, tokens),
-    renderFeatures(data, tokens),
-    renderTestimonials(data, tokens),
-    renderComparison(data, tokens),
-    renderCtaSection(data, tokens),
-    renderFaq(data, tokens),
-    renderFooter(data, tokens),
-  ].filter(Boolean).join('\n');
+  // Render sections in the user-defined order
+  const sections = (data.sectionOrder || [])
+    .map(key => RENDER_MAP[key]?.(data, tokens) ?? '')
+    .filter(Boolean)
+    .join('\n');
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -588,9 +620,7 @@ function generatePreviewHtml(data: PageData): string {
     img { max-width: 100%; height: auto; }
     a { color: inherit; }
     button:focus { outline: none; }
-    @media (max-width: 768px) {
-      body { padding-top: 60px; }
-    }
+    ${generateMobileStyles(data)}
   </style>
 </head>
 <body>

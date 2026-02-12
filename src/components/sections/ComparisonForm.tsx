@@ -1,7 +1,8 @@
 'use client';
 
 import { usePageStore } from '@/store/pageStore';
-import { ComparisonRow } from '@/lib/types';
+import { ComparisonRow, TextSize } from '@/lib/types';
+import SizeSelector from '@/components/ui/SizeSelector';
 
 export default function ComparisonForm() {
   const section = usePageStore((s) => s.comparison);
@@ -80,6 +81,18 @@ export default function ComparisonForm() {
           onChange={(e) => updateSection('comparison', { sectionTitle: e.target.value })}
           placeholder="How We Compare"
           className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        />
+      </div>
+
+      {/* Sizing */}
+      <div className="border-t border-slate-100 pt-3 mt-1">
+        <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Sizing</p>
+        <SizeSelector<TextSize>
+          label="Section Title Size"
+          value={section.sectionTitleSize}
+          onChange={(size) => updateSection('comparison', { sectionTitleSize: size })}
+          options={['2xl', '3xl', '4xl']}
+          type="text"
         />
       </div>
 

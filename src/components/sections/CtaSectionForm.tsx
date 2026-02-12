@@ -1,7 +1,9 @@
 'use client';
 
 import { usePageStore } from '@/store/pageStore';
+import { TextSize, ImageSize } from '@/lib/types';
 import ImageUpload from '@/components/ui/ImageUpload';
+import SizeSelector from '@/components/ui/SizeSelector';
 
 export default function CtaSectionForm() {
   const section = usePageStore((s) => s.ctaSection);
@@ -60,6 +62,32 @@ export default function CtaSectionForm() {
           onChange={(e) => updateSection('ctaSection', { subtext: e.target.value })}
           placeholder="Supporting text for the CTA"
           className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent min-h-[80px] resize-y"
+        />
+      </div>
+
+      {/* Sizing */}
+      <div className="border-t border-slate-100 pt-3 mt-1">
+        <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Sizing</p>
+        <SizeSelector<TextSize>
+          label="Headline Size"
+          value={section.headlineSize}
+          onChange={(size) => updateSection('ctaSection', { headlineSize: size })}
+          options={['2xl', '3xl', '4xl']}
+          type="text"
+        />
+        <SizeSelector<TextSize>
+          label="Subtext Size"
+          value={section.subtextSize}
+          onChange={(size) => updateSection('ctaSection', { subtextSize: size })}
+          options={['base', 'lg', 'xl']}
+          type="text"
+        />
+        <SizeSelector<ImageSize>
+          label="Section Image Size"
+          value={section.ctaImageSize}
+          onChange={(size) => updateSection('ctaSection', { ctaImageSize: size })}
+          options={['md', 'lg', 'xl', 'full']}
+          type="image"
         />
       </div>
 

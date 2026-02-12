@@ -1,7 +1,8 @@
 'use client';
 
 import { usePageStore } from '@/store/pageStore';
-import { Testimonial } from '@/lib/types';
+import { Testimonial, TextSize } from '@/lib/types';
+import SizeSelector from '@/components/ui/SizeSelector';
 
 export default function TestimonialsForm() {
   const section = usePageStore((s) => s.testimonials);
@@ -51,6 +52,25 @@ export default function TestimonialsForm() {
           onChange={(e) => updateSection('testimonials', { sectionTitle: e.target.value })}
           placeholder="What Our Customers Say"
           className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        />
+      </div>
+
+      {/* Sizing */}
+      <div className="border-t border-slate-100 pt-3 mt-1">
+        <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Sizing</p>
+        <SizeSelector<TextSize>
+          label="Section Title Size"
+          value={section.sectionTitleSize}
+          onChange={(size) => updateSection('testimonials', { sectionTitleSize: size })}
+          options={['2xl', '3xl', '4xl']}
+          type="text"
+        />
+        <SizeSelector<TextSize>
+          label="Quote Size"
+          value={section.quoteSize}
+          onChange={(size) => updateSection('testimonials', { quoteSize: size })}
+          options={['base', 'lg', 'xl']}
+          type="text"
         />
       </div>
 
