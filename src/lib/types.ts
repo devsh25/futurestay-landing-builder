@@ -57,6 +57,7 @@ export interface Step {
   stepNumber: string;
   title: string;
   description: string;
+  iconUrl: string;
 }
 
 export interface StepsSection {
@@ -118,6 +119,7 @@ export interface CtaSection {
   subtext: string;
   ctaText: string;
   ctaUrl: string;
+  imageUrl: string;
   testimonial: Testimonial | null;
 }
 

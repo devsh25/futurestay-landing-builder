@@ -2,6 +2,7 @@
 
 import { usePageStore } from '@/store/pageStore';
 import { Step } from '@/lib/types';
+import ImageUpload from '@/components/ui/ImageUpload';
 
 export default function StepsForm() {
   const section = usePageStore((s) => s.steps);
@@ -16,7 +17,7 @@ export default function StepsForm() {
   const addStep = () => {
     const nextNumber = String(section.steps.length + 1);
     updateSection('steps', {
-      steps: [...section.steps, { stepNumber: nextNumber, title: '', description: '' }],
+      steps: [...section.steps, { stepNumber: nextNumber, title: '', description: '', iconUrl: '' }],
     });
   };
 
@@ -86,6 +87,13 @@ export default function StepsForm() {
                   className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent min-h-[80px] resize-y"
                 />
               </div>
+              <ImageUpload
+                compact
+                label="Icon"
+                value={step.iconUrl}
+                onChange={(url) => updateStep(index, 'iconUrl', url)}
+                placeholder="Upload step icon"
+              />
               <button
                 type="button"
                 onClick={() => removeStep(index)}

@@ -1,6 +1,7 @@
 'use client';
 
 import { usePageStore } from '@/store/pageStore';
+import ImageUpload from '@/components/ui/ImageUpload';
 
 export default function CtaSectionForm() {
   const section = usePageStore((s) => s.ctaSection);
@@ -83,6 +84,13 @@ export default function CtaSectionForm() {
           className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         />
       </div>
+
+      <ImageUpload
+        label="Section Image"
+        value={section.imageUrl}
+        onChange={(url) => updateSection('ctaSection', { imageUrl: url })}
+        placeholder="Upload CTA section image"
+      />
 
       <div className="border-t border-slate-200 pt-4">
         <label className="flex items-center gap-2 mb-3">

@@ -2,74 +2,78 @@ import { PageData } from './types';
 import { DEFAULT_TOKENS } from './designTokens';
 
 export const DEFAULT_PAGE_DATA: PageData = {
-  pageName: 'FutureStay Landing Page',
+  pageName: 'FutureStay Direct Booking Website',
   pageSlug: 'direct-booking-website',
   hubspotPageId: null,
 
   designTokens: DEFAULT_TOKENS,
 
   header: {
-    logoUrl: '',
-    primaryCtaText: 'Start Free Trial',
+    logoUrl: 'https://hello.futurestay.com/hubfs/logo_blue.svg',
+    primaryCtaText: 'Start 14-Day Free Trial',
     primaryCtaUrl: 'https://app.futurestay.com/signup',
-    secondaryCtaText: 'Book a Call',
-    secondaryCtaUrl: 'https://calendly.com/futurestay',
+    secondaryCtaText: 'Sign Up with Airbnb',
+    secondaryCtaUrl: 'https://app.futurestay.com/signup?source=airbnb',
     sticky: true,
   },
 
   hero: {
-    headline: "It's Time to Own Your Bookings",
-    subtext: 'Create your direct booking website in minutes. Keep 100% of your revenue. Get found on Google Vacation Rentals.',
-    primaryCtaText: 'Start Your Free Trial',
+    headline: 'Build Your Direct Booking Website for Vacation Rentals',
+    subtext: 'Create your commission-free Airbnb direct booking website in minutes. Keep 100% of your bookings.',
+    primaryCtaText: 'Start 14-Day Free Trial',
     primaryCtaUrl: 'https://app.futurestay.com/signup',
-    secondaryCtaText: 'Book a Call',
-    secondaryCtaUrl: 'https://calendly.com/futurestay',
+    secondaryCtaText: 'Sign Up with Airbnb',
+    secondaryCtaUrl: 'https://app.futurestay.com/signup?source=airbnb',
     trustBadges: [
-      { icon: '\u2713', text: '14-day free trial' },
-      { icon: '\u2713', text: 'No credit card required' },
-      { icon: '\u2713', text: 'Setup in 5 minutes' },
+      { icon: '\u2713', text: 'Launch in 5 Minutes' },
+      { icon: '\u2713', text: 'No Hidden Fees' },
+      { icon: '\u2713', text: 'Cancel Anytime' },
     ],
-    heroImageUrl: '',
+    heroImageUrl: 'https://hello.futurestay.com/hs-fs/hubfs/FY-23/Frame-3357.webp?width=1408&height=1290&name=Frame-3357.webp',
   },
 
   socialProofBar: {
     enabled: true,
     badges: [
-      { imageUrl: '', text: 'Official Airbnb & Google Partner' },
-      { imageUrl: '', text: '4.5/5 Google Rating' },
+      { imageUrl: 'https://hello.futurestay.com/hubfs/airnb-google.svg', text: 'Official Airbnb & Google Partner' },
+      { imageUrl: 'https://hello.futurestay.com/hubfs/google-icon.svg', text: '4.5/5 Google Rating' },
     ],
   },
 
   partnerLogos: {
     enabled: true,
     logos: [
-      { name: 'Booking.com', imageUrl: '' },
-      { name: 'AirDNA', imageUrl: '' },
-      { name: 'Vrbo', imageUrl: '' },
-      { name: 'Google', imageUrl: '' },
-      { name: 'Hopper', imageUrl: '' },
-      { name: 'Turno', imageUrl: '' },
+      { name: 'Google', imageUrl: 'https://hello.futurestay.com/hs-fs/hubfs/FY-23/logoFriendly_google.png?width=105&height=34&name=logoFriendly_google.png' },
+      { name: 'Airbnb', imageUrl: 'https://hello.futurestay.com/hs-fs/hubfs/FY-23/logoFriendly_airbnb-1.png?width=190&height=60&name=logoFriendly_airbnb-1.png' },
+      { name: 'Hopper', imageUrl: 'https://hello.futurestay.com/hs-fs/hubfs/Fy-24/Logos/hopper.png?width=285&height=77&name=hopper.png' },
+      { name: 'Stripe', imageUrl: 'https://hello.futurestay.com/hs-fs/hubfs/Fy-24/Logos/stripe.png?width=168&height=72&name=stripe.png' },
+      { name: 'AirDNA', imageUrl: 'https://hello.futurestay.com/hs-fs/hubfs/FY-23/logoFriendly_airdna.png?width=109&height=17&name=logoFriendly_airdna.png' },
+      { name: 'Waivo', imageUrl: 'https://hello.futurestay.com/hs-fs/hubfs/Fy-24/Logos/waivo.png?width=263&height=76&name=waivo.png' },
+      { name: 'Turno', imageUrl: 'https://hello.futurestay.com/hs-fs/hubfs/Fy-24/Logos/turno.png?width=238&height=58&name=turno.png' },
     ],
   },
 
   steps: {
     enabled: true,
-    sectionTitle: '3 Simple Steps to Direct Bookings',
+    sectionTitle: 'Use Our Direct Booking Website Builder To Create Your Site',
     steps: [
       {
         stepNumber: '1',
-        title: 'Import Your Listing',
-        description: 'Connect your Airbnb account and import your property in one click. Your listing details, photos, and calendar sync automatically.',
+        title: 'Import',
+        description: 'Connect your Airbnb account and import property details, photos, amenities, and pricing with a few clicks.',
+        iconUrl: 'https://hello.futurestay.com/hubfs/Import.svg',
       },
       {
         stepNumber: '2',
-        title: 'Customize Your Site',
-        description: 'Your professional direct booking website is created instantly. Customize your branding, policies, and pricing.',
+        title: 'Personalize',
+        description: 'Add custom pages, policies, and your unique style to your direct booking website.',
+        iconUrl: 'https://hello.futurestay.com/hubfs/Customize.svg',
       },
       {
         stepNumber: '3',
-        title: 'Launch & Get Bookings',
-        description: 'Go live on Google Vacation Rentals and start receiving commission-free direct bookings from day one.',
+        title: 'Launch',
+        description: 'Go live with your commission-free direct booking website for vacation rentals and reach millions of travelers on Google Vacation Rentals.',
+        iconUrl: 'https://hello.futurestay.com/hubfs/Launch.svg',
       },
     ],
   },
@@ -77,45 +81,45 @@ export const DEFAULT_PAGE_DATA: PageData = {
   stats: {
     enabled: true,
     stats: [
-      { value: '$6,000', label: 'Average Annual Savings' },
-      { value: '5 min', label: 'Average Setup Time' },
-      { value: '1,000+', label: 'Direct Booking Websites' },
-      { value: '27%', label: 'More Revenue Per Booking' },
+      { value: '95,000+', label: 'Commission-Free Direct Booking Websites Created' },
+      { value: '$6,000', label: 'Average Annual Commission Saved per Property' },
+      { value: '27%', label: 'More Revenue from Multi-Channel Distribution' },
+      { value: '5 min', label: 'Average Time to Launch Your Direct Booking Website' },
     ],
   },
 
   features: {
     enabled: true,
-    sectionTitle: 'Everything You Need for Successful Direct Bookings',
+    sectionTitle: 'The Best Direct Booking Platform for Vacation Rentals',
     features: [
       {
-        title: 'Google Vacation Rentals Integration',
-        description: 'Get listed on Google Vacation Rentals with one click. 70% of travelers start their search on Google \u2014 be where your guests are looking.',
+        title: 'Google Vacation Rentals',
+        description: 'List on Google Vacation Rentals through official partner integration to reach millions of travelers searching for rentals.',
+        imageUrl: '',
+      },
+      {
+        title: 'Real-Time Calendar Sync',
+        description: 'Two-way sync with Airbnb, VRBO, and Booking.com. Update once, reflect everywhere\u2014eliminating double bookings.',
+        imageUrl: '',
+      },
+      {
+        title: 'Dynamic Pricing',
+        description: 'Maximize revenue by 20-40% with AI-powered pricing that adjusts rates based on demand, competition, and seasonality.',
         imageUrl: '',
       },
       {
         title: 'Automated Guest Messaging',
-        description: 'Pre-built lifecycle messages that go out automatically at every stage \u2014 from booking confirmation to checkout follow-up.',
+        description: 'Save 20+ hours weekly with automated emails that handle confirmations, check-in instructions, and review requests.',
         imageUrl: '',
       },
       {
-        title: 'Guest Verification & Protection',
-        description: 'Built-in booking protection and risk management on every direct booking. Flag high-risk reservations automatically.',
-        imageUrl: '',
-      },
-      {
-        title: 'Channel Sync',
-        description: 'Always-synced calendars across all your channels. No double bookings, no manual updates.',
-        imageUrl: '',
-      },
-      {
-        title: 'Dynamic Pricing (AI-Powered)',
-        description: 'Smart Pricing powered by AirDNA analyzes market data, seasonality, and demand patterns to optimize your rates automatically.',
+        title: 'Direct Booking Protection',
+        description: 'Accept direct bookings with confidence using built-in fraud detection and damage protection at no extra cost.',
         imageUrl: '',
       },
       {
         title: 'Mobile-Optimized Booking',
-        description: 'Your direct booking site is fully responsive and optimized for mobile guests who book on the go.',
+        description: 'Capture the 72% of travelers who book on mobile with a fully responsive direct booking website optimized for fast conversions.',
         imageUrl: '',
       },
     ],
@@ -123,12 +127,30 @@ export const DEFAULT_PAGE_DATA: PageData = {
 
   testimonials: {
     enabled: true,
-    sectionTitle: 'Join 1,000+ Hosts Earning More with Direct Bookings',
+    sectionTitle: 'Why Hosts Call FutureStay the Best Direct Booking Website Builder',
     testimonials: [
       {
-        quote: 'FutureStay made it so easy to get my own booking website. I was up and running in less than 10 minutes, and I\'ve already saved hundreds in commissions.',
-        authorName: 'Caroline G.',
+        quote: 'They made me feel that my little BnB was as important to them as a huge resort. The details that made my listing better were so helpful.',
+        authorName: 'K.W.',
+        authorTitle: 'BnB Owner',
+        rating: 5,
+      },
+      {
+        quote: 'As soon as I made the updates he requested, I received two additional bookings. I am 85% booked for the summer season.',
+        authorName: 'T.G.',
         authorTitle: 'Vacation Rental Host',
+        rating: 5,
+      },
+      {
+        quote: "I'm completely new to short-term rentals, and while my head is spinning with all the details of physically setting up my properties, the kind people at Futurestay have patiently walked me through onboarding and a review and they have built my confidence that I can do this!",
+        authorName: 'B.B.',
+        authorTitle: 'New Host',
+        rating: 5,
+      },
+      {
+        quote: 'As someone who has been hosting a year and a half having FutureStay has been a game changer for me. If you want to up your game and maximize your short and mid term rental game it is worth the investment.',
+        authorName: 'L.M.',
+        authorTitle: 'Owns 1 unit, Atlanta, GA',
         rating: 5,
       },
     ],
@@ -136,84 +158,81 @@ export const DEFAULT_PAGE_DATA: PageData = {
 
   comparison: {
     enabled: true,
-    sectionTitle: 'See How FutureStay Compares',
-    columns: ['Feature', 'FutureStay', 'Airbnb / VRBO', 'Hospitable'],
+    sectionTitle: 'FutureStay vs Airbnb vs Hospitable: Direct Booking Website Comparison',
+    columns: ['Feature', 'FutureStay', 'Airbnb/VRBO', 'Hospitable'],
     rows: [
-      { feature: 'Commission', values: ['0%', '15-20%', '0% + $40/mo'] },
-      { feature: 'Direct Booking Website', values: ['Included', 'N/A', 'Not Included'] },
-      { feature: 'Google Vacation Rentals', values: ['1-Click Setup', 'N/A', 'Not Included'] },
-      { feature: 'Smart Pricing', values: ['AI-Powered', 'Basic', 'Not Included'] },
-      { feature: 'Guest Protection', values: ['Built-In', 'Platform Only', 'Not Included'] },
-      { feature: 'Airbnb Import', values: ['1-Click Import', 'N/A', 'Manual Setup'] },
-      { feature: 'Monthly Cost', values: ['$25 Flat Fee', '15-20% per booking', '$40+/mo'] },
+      { feature: 'Dynamic Pricing (AI)', values: ['AirDNA + PriceLabs Integrations', 'Basic tools', 'Available'] },
+      { feature: 'Customer Support', values: ['Dedicated Account Manager', 'Limited support', 'Email support'] },
+      { feature: 'Airbnb Import', values: ['1-Click Import', 'Not Available', 'Available'] },
+      { feature: 'Setup Time', values: ['5 minutes', '1-2 hours', '30+ minutes'] },
+      { feature: 'Instant Booking', values: ['Available', 'Available', 'Premium Feature'] },
+      { feature: 'Guest Protection', values: ['$25 Flat Fee', 'Limited by AirCover', 'Premium Feature'] },
+      { feature: 'Google Vacation Rentals', values: ['Official Partner', 'Not Available', 'Premium Feature'] },
+      { feature: 'Commission Fees', values: ['0% + Stripe processing', '15-20% per booking', '1-4% + processing'] },
     ],
   },
 
   ctaSection: {
     enabled: true,
-    headline: 'Ready to Own Your Bookings?',
-    subtext: 'Start your free 14-day trial today. No credit card required.',
-    ctaText: 'Start Your Free 14-Day Trial',
+    headline: 'Ready to Build Your Airbnb Direct Booking Website?',
+    subtext: 'Create your commission-free direct booking website in minutes and keep 100% of your revenue.',
+    ctaText: 'Launch My Direct Booking Website',
     ctaUrl: 'https://app.futurestay.com/signup',
-    testimonial: {
-      quote: 'I wish I had found FutureStay sooner. The direct booking website pays for itself every single month.',
-      authorName: 'William Johnson',
-      authorTitle: 'Property Owner',
-      rating: 5,
-    },
+    imageUrl: 'https://hello.futurestay.com/hs-fs/hubfs/futurestay_cabin_rental_owner-min.webp',
+    testimonial: null,
   },
 
   faq: {
     enabled: true,
-    sectionTitle: 'Frequently Asked Questions',
+    sectionTitle: 'Direct Booking Website FAQ:',
     items: [
       {
-        question: 'How does FutureStay work with my Airbnb listing?',
-        answer: 'FutureStay connects to Airbnb via their official API. Your listing is imported read-only \u2014 zero risk to your existing bookings or search ranking. You can then create a direct booking website that works alongside Airbnb.',
+        question: 'Who is Futurestay?',
+        answer: 'FutureStay is the essential tool for rental entrepreneurs (rentalpreneurs). We provide everything you need to build and manage your direct booking website, including payment processing, reservation management, and distribution to Google Vacation Rentals.',
       },
       {
-        question: 'Do I need any technical skills to get started?',
-        answer: 'Not at all. Our famous 5-minute onboarding guides you through everything. Import your listing, customize your site, and launch \u2014 no coding or design skills needed.',
+        question: 'What type of properties does Futurestay support?',
+        answer: 'FutureStay supports whole homes including houses, cabins, cottages, condos, apartments, and similar properties. We currently do not support shared spaces, campsites, boats, or RVs.',
       },
       {
-        question: 'How much does FutureStay cost?',
-        answer: 'FutureStay is just $25/month with a 14-day free trial. No commissions, no hidden fees. You keep 100% of your booking revenue.',
+        question: 'Does Futurestay support international properties?',
+        answer: 'FutureStay currently serves properties in the US, Puerto Rico, Mexico, and Canada. We have an international waitlist for hosts in other countries.',
+      },
+      {
+        question: 'How to create a direct booking website with Futurestay?',
+        answer: 'Simply answer a few questions, and our builder handles the rest. You can import your Airbnb listing or start from scratch. Your direct booking website will be enabled for Google Vacation Rentals and commission-free bookings.',
+      },
+      {
+        question: 'What is Smart Rates?',
+        answer: 'Smart Rates is our AI-powered dynamic pricing tool, powered by AirDNA, that analyzes over 10 million global rentals. It provides personalized rate suggestions to optimize your revenue and increase bookings by 20-40%.',
       },
       {
         question: 'What is Google Vacation Rentals?',
-        answer: 'Google Vacation Rentals is the largest direct booking discovery engine on the internet. When travelers search for vacation rentals on Google, your property can appear directly in search results \u2014 commission-free.',
+        answer: "Google Vacation Rentals is Google's feature that allows users to search and book vacation rentals directly from Google Search. As an official partner, FutureStay can list your property on Google Vacation Rentals commission-free.",
       },
       {
-        question: 'How do I get on Google Vacation Rentals?',
-        answer: 'With FutureStay, it\u2019s one click. We handle all the technical requirements, feed management, and sync. Your listing goes live on Google within days of launching.',
+        question: 'Is Futurestay integrated with Airbnb?',
+        answer: 'Yes! FutureStay has a direct integration with Airbnb via their official API. This provides real-time synchronization of rates, calendars, and property configurations.',
       },
       {
-        question: 'What happens after my 14-day trial?',
-        answer: 'After your trial, your subscription continues at $25/month. You can cancel anytime. Your direct booking website stays live as long as your subscription is active.',
+        question: 'Can I work with Futurestay without Airbnb?',
+        answer: 'Absolutely. Many hosts use FutureStay purely for direct bookings integrated with Google Vacation Rentals. The only feature that requires Airbnb is Smart Rates. You can sync other channels via iCal.',
       },
       {
-        question: 'Do I need to leave Airbnb to use FutureStay?',
-        answer: 'No! FutureStay works alongside Airbnb. Keep your Airbnb listing performing while building your direct booking channel. Over time, your best guests will book directly.',
-      },
-      {
-        question: 'How do I accept payments on my direct booking site?',
-        answer: 'FutureStay integrates with Stripe for secure payment processing. Connect your bank account, and guests can pay directly \u2014 with fast payouts and zero commission.',
-      },
-      {
-        question: 'Is there customer support if I need help?',
-        answer: 'Absolutely. Our team is here to help you succeed. You can book a call anytime, and we offer hands-on onboarding support to get you launched.',
+        question: 'Can I use Futurestay with VRBO, Booking.com, etc.?',
+        answer: 'Yes! FutureStay has direct integrations with Airbnb and Google. For other platforms like VRBO, Booking.com, and more, we support iCal integration to keep your calendars in sync.',
       },
     ],
   },
 
   footer: {
-    phone: '(555) 123-4567',
-    email: 'hello@futurestay.com',
+    phone: '(888) 885-3439',
+    email: 'connect@futurestay.com',
     copyrightText: '\u00a9 2026 FutureStay. All rights reserved.',
     socialLinks: {
       facebook: 'https://facebook.com/futurestay',
       instagram: 'https://instagram.com/futurestay',
-      twitter: 'https://twitter.com/futurestay',
+      twitter: '',
       youtube: 'https://youtube.com/futurestay',
       linkedin: 'https://linkedin.com/company/futurestay',
     },
