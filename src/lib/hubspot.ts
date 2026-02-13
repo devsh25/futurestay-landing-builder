@@ -36,6 +36,7 @@ interface CreatePagePayload {
   footerHtml: string;
   htmlTitle?: string;
   metaDescription?: string;
+  templatePath?: string;
 }
 
 export async function createLandingPage(payload: CreatePagePayload) {

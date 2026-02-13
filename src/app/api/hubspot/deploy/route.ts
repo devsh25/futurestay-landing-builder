@@ -33,6 +33,7 @@ export async function POST(request: Request) {
       headHtml,
       footerHtml,
       htmlTitle: pageData.pageName,
+      templatePath: 'Futurestay_theme/templates/Booking.html',
     };
 
     let resultPageId = pageId;
