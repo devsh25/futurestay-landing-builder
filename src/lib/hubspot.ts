@@ -37,6 +37,7 @@ interface CreatePagePayload {
   htmlTitle?: string;
   metaDescription?: string;
   templatePath?: string;
+  layoutSections?: Record<string, unknown>;
 }
 
 export async function createLandingPage(payload: CreatePagePayload) {

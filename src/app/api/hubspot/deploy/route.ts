@@ -34,6 +34,24 @@ export async function POST(request: Request) {
       footerHtml,
       htmlTitle: pageData.pageName,
       templatePath: 'Futurestay_theme/templates/Booking.html',
+      // Empty dnd_area prevents the template from rendering its default modules.
+      // All visible content comes from headHtml (CSS) and footerHtml (HTML + JS).
+      layoutSections: {
+        dnd_area: {
+          cells: [],
+          cssClass: '',
+          cssId: '',
+          cssStyle: '',
+          label: 'Main section',
+          name: 'dnd_area',
+          params: {},
+          rowMetaData: [],
+          rows: [],
+          type: 'cell',
+          w: 12,
+          x: 0,
+        },
+      },
     };
 
     let resultPageId = pageId;
